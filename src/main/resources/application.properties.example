@@ -1,0 +1,11 @@
+zeebe.client.cloud.region=
+zeebe.client.cloud.clusterId=
+zeebe.client.cloud.clientId=
+zeebe.client.cloud.clientSecret=
+
+spring.mail.host=
+spring.mail.port=
+spring.mail.username=
+spring.mail.password=
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
