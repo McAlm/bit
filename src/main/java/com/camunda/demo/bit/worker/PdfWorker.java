@@ -14,13 +14,16 @@ import com.itextpdf.text.pdf.PdfWriter;
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import io.camunda.zeebe.spring.client.annotation.VariablesAsType;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
 
 @Component
@@ -41,8 +44,11 @@ public class PdfWorker {
             new FileOutputStream(var10003.resolve(var10004 + "_" + data.getNachname() + ".pdf").toString()));
       document.open();
 
-      Path path = Paths.get(ResourceUtils.getFile("classpath:static/BITBW_Logo_RGB.jpg").getAbsolutePath());
-      Image img = Image.getInstance(path.toAbsolutePath().toString());
+      // Path path = Paths.get(ResourceUtils.getFile("classpath:static/BITBW_Logo_RGB.jpg").getAbsolutePath());
+      // Image img = Image.getInstance(path.toAbsolutePath().toString());
+      InputStream resource = new ClassPathResource("classpath:static/BITBW_Logo_RGB.jpg").getInputStream();
+      byte[] copyToByteArray = FileCopyUtils.copyToByteArray(resource);
+      Image img = Image.getInstance(copyToByteArray);
       img.scaleAbsolute(50, 17);
       document.add(img);
 
