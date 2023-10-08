@@ -1,0 +1,52 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.2.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "6c48892"
+  },
+  "schemaVersion": 11,
+  "components": [
+    {
+      "label": "Antrag annehmen?",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1ifd00j",
+        "columns": null
+      },
+      "id": "Field_1n24cvl",
+      "key": "angenommen"
+    },
+    {
+      "label": "Begründung",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0759on8",
+        "columns": null
+      },
+      "id": "Field_1l9mkph",
+      "key": "begruendungAbgelehnt",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=angenommen"
+      }
+    },
+    {
+      "label": "Begründung",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1tpredg",
+        "columns": null
+      },
+      "id": "Field_02cuban",
+      "key": "begruendungAngenommen",
+      "conditional": {
+        "hide": "=not(angenommen)"
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_0cel1wp"
+}

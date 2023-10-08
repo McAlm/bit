@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="6c48892" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" camunda:diagramRelationId="272eaf54-1d09-491f-a593-9e32331faae2">
+  <bpmn:process id="testDynamicRequiredTextField" isExecutable="true">
+    <bpmn:extensionElements>
+      <zeebe:userTaskForm id="userTaskForm_2u4ek33">{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.2.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "6c48892"
+  },
+  "schemaVersion": 11,
+  "components": [
+    {
+      "label": "Antrag annehmen?",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1ifd00j",
+        "columns": null
+      },
+      "id": "Field_1n24cvl",
+      "key": "angenommen"
+    },
+    {
+      "label": "Begründung",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0759on8",
+        "columns": null
+      },
+      "id": "Field_1l9mkph",
+      "key": "begruendungAbgelehnt",
+      "validate": {
+        "required": true
+      },
+      "conditional": {
+        "hide": "=angenommen"
+      }
+    },
+    {
+      "label": "Begründung",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1tpredg",
+        "columns": null
+      },
+      "id": "Field_02cuban",
+      "key": "begruendungAngenommen",
+      "conditional": {
+        "hide": "=not(angenommen)"
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_0cel1wp"
+}</zeebe:userTaskForm>
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="Event_052tkmm">
+      <bpmn:outgoing>Flow_0xiwzff</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0xiwzff" sourceRef="Event_052tkmm" targetRef="Activity_1gmp9ca" />
+    <bpmn:endEvent id="Event_1cxb9wa">
+      <bpmn:incoming>Flow_12zc2e5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_12zc2e5" sourceRef="Activity_1gmp9ca" targetRef="Event_1cxb9wa" />
+    <bpmn:userTask id="Activity_1gmp9ca" name="Antragsannahme">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=if angenommen then begruendungAngenommen else begruendungAbgelehnt" target="begruendung" />
+        </zeebe:ioMapping>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:userTaskForm_2u4ek33" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0xiwzff</bpmn:incoming>
+      <bpmn:outgoing>Flow_12zc2e5</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="testDynamicRequiredTextField">
+      <bpmndi:BPMNShape id="Event_052tkmm_di" bpmnElement="Event_052tkmm">
+        <dc:Bounds x="152" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1cxb9wa_di" bpmnElement="Event_1cxb9wa">
+        <dc:Bounds x="392" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00oa03c_di" bpmnElement="Activity_1gmp9ca">
+        <dc:Bounds x="240" y="60" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0xiwzff_di" bpmnElement="Flow_0xiwzff">
+        <di:waypoint x="188" y="100" />
+        <di:waypoint x="240" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12zc2e5_di" bpmnElement="Flow_12zc2e5">
+        <di:waypoint x="340" y="100" />
+        <di:waypoint x="392" y="100" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
